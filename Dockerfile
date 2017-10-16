@@ -1,0 +1,1 @@
+LABEL maintainer="Telegram Desktop"
