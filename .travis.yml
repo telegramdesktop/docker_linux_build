@@ -5,5 +5,5 @@ language: generic
 services:
   - docker
 
-install:
-  - docker build -t telegram_desktop .
+script:
+  - ./build.sh
