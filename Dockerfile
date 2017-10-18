@@ -5,7 +5,7 @@ LABEL description="Build container for Telegram Desktop (Linux)"
 ENV DEBIAN_FRONTEND=noninteractive
 COPY tdesktop/Telegram/Patches /TBuild/tdesktop/Telegram/Patches
 WORKDIR /TBuild/Libraries
-ARG MAKE_ARGS=-j4 --silent 
+ARG MAKE_ARGS="--silent -j4"
 
 # Tools
 RUN apt-get update -q && \
