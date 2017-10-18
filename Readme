@@ -1,0 +1,21 @@
+This Docker container for building Linux executable of Telegram Desktop (https://github.com/telegramdesktop/tdesktop).
+Image is based on Ubuntu 12.04. It builds all dependencies from source, so be patient.
+
+To build on Windows:
+1) Install Docker Toolbox - https://www.docker.com/products/docker-toolbox
+4) Open console (cmd, cygwin, msys - your choice)
+2) Create Docker VM from console:
+    docker-machine create -d virtualbox --virtualbox-cpu-count 4 --virtualbox-memory 6064
+3) Follow instructions of:
+    docker-machine env
+5) Clone recursively this repo and cd into. Please checkout with Unix EOL (\n not \r\n)!:
+    git config --global core.autocrlf input
+   Also this repo must be in your home folder - like C:\Users\Roma\Documents\Github\Telegram!)
+    git clone --recursive https://github.com/tdesktop/docker.git Telegram
+6) Build container image (that will take half an hour at least)
+    docker build . -t tdesktop_build:12.04
+7) After the image is built, run:
+    docker run -it --mount type=bind,source=/c/Users/Roma/Documents/Github/Telegram/tdesktop,target=/TBuild/tdesktop tdesktop_build bash
+8) Inside the container:
+    cd /TBuild/tdesktop/Telegram && gyp/refresh.sh && cd ../out/Debug && make -j4
+9) Executable will be available in tdesktop\Out\Debug
