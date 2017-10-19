@@ -17,7 +17,3 @@ jobs:
       script: ./build.sh dependencies2
     - stage: all
       script: ./build.sh
-
-after_success:
-  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-  - docker push telegramdesktop/docker_linux_dependencies1
