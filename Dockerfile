@@ -1,6 +1,6 @@
-ARG TEST="ubuntu:12.04"
+ARG FROM="ubuntu:12.04"
 
-FROM ${TEST}
+FROM ${FROM}
 LABEL maintainer="Telegram Desktop (https://github.com/telegramdesktop/docker)"
 LABEL description="Build container for Telegram Desktop (Linux)"
 
