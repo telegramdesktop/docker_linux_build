@@ -85,3 +85,52 @@ RUN if [ "${STAGE}" = "dependencies1" ] || [ "${STAGE}" = "all" ]; then \
     cmake -D LIBTYPE:STRING=STATIC .. && \
     make ${MAKE_ARGS} && make install; \
     fi
+
+# OpenSSL
+RUN if [ "${STAGE}" = "dependencies2" ] || [ "${STAGE}" = "all" ]; then \
+    git clone https://github.com/openssl/openssl && \
+    cd openssl && git checkout -q OpenSSL_1_0_1-stable && \
+    ./config && make ${MAKE_ARGS} && make install; \
+    fi
+
+# Libxcbcommon
+RUN if [ "${STAGE}" = "dependencies2" ] || [ "${STAGE}" = "all" ]; then \
+    git clone https://github.com/xkbcommon/libxkbcommon.git && \
+    cd libxkbcommon && \
+    ./autogen.sh --disable-x11 && \
+    make ${MAKE_ARGS} && make install; \
+    fi
+
+# Patching QT5
+RUN if [ "${STAGE}" = "dependencies2" ] || [ "${STAGE}" = "all" ]; then \
+    git clone git://code.qt.io/qt/qt5.git qt5_6_2 && \
+    cd qt5_6_2 && \
+    perl init-repository --module-subset=qtbase,qtimageformats && \
+    git checkout -q v5.6.2 && \
+    cd qtimageformats && git checkout -q v5.6.2 && cd .. && \
+    cd qtbase && git checkout -q v5.6.2 && \
+    git apply ../../../tdesktop/Telegram/Patches/qtbase_5_6_2.diff && \
+    cd src/plugins/platforminputcontexts && \
+    git clone https://github.com/telegramdesktop/fcitx.git && \
+    git clone https://github.com/telegramdesktop/hime.git && \
+    cd ../../../.. && \
+    ./configure -prefix "/usr/local/tdesktop/Qt-5.6.2" -release -force-debug-info -opensource -confirm-license -qt-zlib -qt-libpng -qt-libjpeg -qt-freetype -qt-harfbuzz -qt-pcre -qt-xcb -qt-xkbcommon-x11 -no-opengl -no-gtkstyle -static -openssl-linked -nomake examples -nomake tests && \
+    make ${MAKE_ARGS} && make install; \
+    fi
+
+# Breakpad
+RUN if [ "${STAGE}" = "dependencies2" ] || [ "${STAGE}" = "all" ]; then \
+    git clone https://chromium.googlesource.com/breakpad/breakpad && \
+    git clone https://chromium.googlesource.com/linux-syscall-support breakpad/src/third_party/lss && \
+    cd breakpad && ./configure --prefix=$PWD && \
+    make ${MAKE_ARGS} && make install; \
+    fi
+
+# Gyp
+RUN if [ "${STAGE}" = "dependencies2" ] || [ "${STAGE}" = "all" ]; then \
+    git clone https://chromium.googlesource.com/external/gyp && \
+    wget https://cmake.org/files/v3.6/cmake-3.6.2.tar.gz && tar -xf cmake-3.6.2.tar.gz && \
+    cd gyp && git checkout -q 702ac58e47 && \
+    git apply ../../tdesktop/Telegram/Patches/gyp.diff && \
+    cd ../cmake-3.6.2 && ./configure && make ${MAKE_ARGS}; \
+    fi
