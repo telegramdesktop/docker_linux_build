@@ -34,6 +34,13 @@ RUN if [ "${STAGE}" = "dependencies1" ] || [ "${STAGE}" = "all" ]; then \
     update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 60; \
     fi
 
+# Cmake
+RUN if [ "${STAGE}" = "dependencies1" ] || [ "${STAGE}" = "all" ]; then \
+    wget -qnv https://cmake.org/files/v3.6/cmake-3.6.2.tar.gz && \
+    tar -xf cmake-3.6.2.tar.gz && cd cmake-3.6.2 && \
+    ./configure && make ${MAKE_ARGS} && make install; \
+    fi
+
 # Zlib
 RUN if [ "${STAGE}" = "dependencies1" ] || [ "${STAGE}" = "all" ]; then \
     git clone https://github.com/telegramdesktop/zlib.git && \
@@ -129,8 +136,6 @@ RUN if [ "${STAGE}" = "dependencies2" ] || [ "${STAGE}" = "all" ]; then \
 # Gyp
 RUN if [ "${STAGE}" = "dependencies2" ] || [ "${STAGE}" = "all" ]; then \
     git clone https://chromium.googlesource.com/external/gyp && \
-    wget https://cmake.org/files/v3.6/cmake-3.6.2.tar.gz && tar -xf cmake-3.6.2.tar.gz && \
     cd gyp && git checkout -q 702ac58e47 && \
     git apply ../../tdesktop/Telegram/Patches/gyp.diff && \
-    cd ../cmake-3.6.2 && ./configure && make ${MAKE_ARGS}; \
     fi
