@@ -30,7 +30,7 @@ RUN wget -qnv https://cmake.org/files/v3.6/cmake-3.6.2.tar.gz &&\
     ./configure && make -j4 && make install
 
 # Zlib
-RUN wget q-nv http://zlib.net/fossils/zlib-1.2.8.tar.gz &&\
+RUN wget -qnv http://zlib.net/fossils/zlib-1.2.8.tar.gz &&\
     tar xf zlib-1.2.8.tar.gz &&\
     cd zlib-1.2.8 && ./configure && make -j4 &&  make install
 

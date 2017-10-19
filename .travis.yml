@@ -6,4 +6,4 @@ services:
   - docker
 
 install:
-  - docker build -t telegram_desktop .
+  - docker build -t tdesktop_build .
