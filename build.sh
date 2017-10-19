@@ -3,8 +3,10 @@ if [ ! -d tdesktop ]; then
 fi
 
 if [ $# -eq 0 ]
-  then
+then
     docker build . -t tdesktop
-else
+elif [ $1 = "dependencies2" ]; then
+    docker build . -t tdesktop --build-arg STAGE=$1 --build-arg FROM=test
+else 
     docker build . -t tdesktop --build-arg STAGE=$1
 fi
