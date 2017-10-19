@@ -94,14 +94,14 @@ RUN if [ "${STAGE}" = "dependencies1" ] || [ "${STAGE}" = "all" ]; then \
     fi
 
 # OpenSSL
-RUN if [ "${STAGE}" = "dependencies2" ] || [ "${STAGE}" = "all" ]; then \
+RUN if [ "${STAGE}" = "dependencies1" ] || [ "${STAGE}" = "all" ]; then \
     git clone https://github.com/openssl/openssl && \
     cd openssl && git checkout -q OpenSSL_1_0_1-stable && \
     ./config && make ${MAKE_ARGS} && make install; \
     fi
 
 # Libxcbcommon
-RUN if [ "${STAGE}" = "dependencies2" ] || [ "${STAGE}" = "all" ]; then \
+RUN if [ "${STAGE}" = "dependencies1" ] || [ "${STAGE}" = "all" ]; then \
     git clone https://github.com/xkbcommon/libxkbcommon.git && \
     cd libxkbcommon && \
     ./autogen.sh --disable-x11 && \
