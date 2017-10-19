@@ -11,6 +11,7 @@ elif [ $1 = "dependencies2" ]; then
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
     docker push telegramdesktop/tdesktop
 else 
+    docker pull telegramdesktop/docker_linux_dependencies1
     docker build . -t telegramdesktop/docker_linux_dependencies1 --build-arg STAGE=$1
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
     docker push telegramdesktop/docker_linux_dependencies1
