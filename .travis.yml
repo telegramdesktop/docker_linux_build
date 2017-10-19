@@ -5,5 +5,9 @@ language: generic
 services:
   - docker
 
-script:
-  - ./build.sh
+jobs:
+  include:
+    - stage: dependencies1 
+      script: ./build.sh dependencies1
+    - stage: dependencies2
+      script: ./build.sh dependencies2
