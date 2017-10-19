@@ -1,4 +1,9 @@
-#!/bin/sh
+#!/bin/bash
+
+function pushToHub {
+    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+    docker push telegramdesktop/docker_linux_dependencies1
+}
 
 if [ ! -d tdesktop ]; then
     git clone -b dev https://github.com/telegramdesktop/tdesktop.git
@@ -28,8 +33,3 @@ else
     
     pushToHub
 fi
-
-pushToHub() {
-    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-    docker push telegramdesktop/docker_linux_dependencies1
-}
