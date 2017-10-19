@@ -11,8 +11,10 @@ WORKDIR /TBuild/Libraries
 ARG STAGE="all"
 
 # Tools
-RUN if [ "${STAGE}" = "dependencies1" ] or [ "${STAGE}" = "all" ] ; then apt-get update -q && \
-    apt-get install -qy git wget dos2unix software-properties-common python-software-properties fi
+RUN if [ "${STAGE}" = "dependencies1" ] or [ "${STAGE}" = "all" ]; then \
+    apt-get update -q && \
+    apt-get install -qy git wget dos2unix software-properties-common python-software-properties; \
+    fi
 
 # Dev Libraries
 RUN if [ "$STAGE" = "dependencies1" ] or [ "$STAGE" = "all" ] ; then \
