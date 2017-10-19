@@ -11,6 +11,8 @@ WORKDIR /TBuild/Libraries
 ARG STAGE="all"
 ARG MAKE_ARGS="--silent -j4"
 
+lofdsgdfg
+
 # Tools
 RUN if [ "$STAGE" = "dependencies1" ] || [ "${STAGE}" = "all" ]; then \
     apt-get update -q && \
