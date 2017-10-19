@@ -13,6 +13,7 @@ ARG MAKE_ARGS="--silent -j4"
 
 # Tools
 RUN if [ "$STAGE" = "dependencies1" ] || [ "${STAGE}" = "all" ]; then \
+    apt-get update && \
     apt-get install software-properties-common && \
     add-apt-repository ppa:ubuntu-toolchain-r/test && \
     add-apt-repository ppa:george-edison55/cmake-3.x && \
