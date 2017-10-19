@@ -137,5 +137,5 @@ RUN if [ "${STAGE}" = "dependencies2" ] || [ "${STAGE}" = "all" ]; then \
 RUN if [ "${STAGE}" = "dependencies2" ] || [ "${STAGE}" = "all" ]; then \
     git clone https://chromium.googlesource.com/external/gyp && \
     cd gyp && git checkout -q 702ac58e47 && \
-    git apply ../../tdesktop/Telegram/Patches/gyp.diff && \
+    git apply ../../tdesktop/Telegram/Patches/gyp.diff; \
     fi
