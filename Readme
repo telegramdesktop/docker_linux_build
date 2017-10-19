@@ -5,9 +5,9 @@ To build on Windows:
 1) Install Docker Toolbox - https://www.docker.com/products/docker-toolbox
 4) Open console (cmd, cygwin, msys - your choice)
 2) Create Docker VM from console:
-    docker-machine create -d virtualbox --virtualbox-cpu-count 4 --virtualbox-memory 6064
+    docker-machine create -d virtualbox --virtualbox-cpu-count 4 --virtualbox-memory 6064 tdesktop-build
 3) Follow instructions of:
-    docker-machine env
+    docker-machine env tdesktop-build
 5) Clone recursively this repo and cd into. Please checkout with Unix EOL (\n not \r\n)!:
     git config --global core.autocrlf input
    Also this repo must be in your home folder - like C:\Users\Roma\Documents\Github\Telegram!)
