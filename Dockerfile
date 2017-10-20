@@ -98,3 +98,45 @@ RUN if [ "$STAGE" = "dependencies1" ] || [ "${STAGE}" = "all" ]; then \
     ./autogen.sh --disable-x11 && \
     make $MAKE_ARGS && make install; \
     fi
+
+RUN if [ "$STAGE" = "dependencies2" ] || [ "${STAGE}" = "all" ]; then \
+    git clone git://code.qt.io/qt/qt5.git qt5_6_2 && \
+    cd qt5_6_2 && \
+    perl init-repository --module-subset=qtbase,qtimageformats && \
+    git checkout v5.6.2 && \
+    cd qtimageformats && git checkout v5.6.2 && cd .. && \
+    cd qtbase && git checkout v5.6.2 && cd .. && \
+    cd qtbase && git apply ../../../tdesktop/Telegram/Patches/qtbase_5_6_2.diff && cd .. && \
+    cd qtbase/src/plugins/platforminputcontexts && \
+    git clone https://github.com/telegramdesktop/fcitx.git && \
+    git clone https://github.com/telegramdesktop/hime.git && \
+    cd ../../../.. && \
+    ./configure -prefix "/usr/local/tdesktop/Qt-5.6.2" -release -force-debug-info -opensource -confirm-license -qt-zlib -qt-libpng -qt-libjpeg -qt-freetype -qt-harfbuzz -qt-pcre -qt-xcb -qt-xkbcommon-x11 -no-opengl -no-gtkstyle -static -openssl-linked -nomake examples -nomake tests && \
+    make $MAKE_ARGS && \
+    sudo make install; \
+	fi
+
+# gyp
+RUN if [ "$STAGE" = "dependencies2" ] || [ "${STAGE}" = "all" ]; then \
+    git clone https://chromium.googlesource.com/external/gyp && \
+    cd gyp && \
+    git checkout 702ac58e47 && \
+    git apply ../../tdesktop/Telegram/Patches/gyp.diff; \
+    fi
+
+# breakpad, google test
+RUN if [ "$STAGE" = "dependencies2" ] || [ "${STAGE}" = "all" ]; then \
+    git clone https://chromium.googlesource.com/breakpad/breakpad && \
+    git clone https://chromium.googlesource.com/linux-syscall-support breakpad/src/third_party/lss && \
+    cd breakpad && \
+    ./configure && \
+    make $MAKE_ARGS && \
+    sudo make install && \
+    cd src && \
+    git clone https://github.com/google/googletest testing && \
+    cd tools && \
+    ../../../gyp/gyp  --depth=. --generator-output=.. -Goutput_dir=../out tools.gyp --format=cmake && \
+    cd ../../out/Default && \
+    cmake . && \
+    make $MAKE_ARGS dump_syms; \
+    fi
