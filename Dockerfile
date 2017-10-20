@@ -38,5 +38,5 @@ RUN if [ "$STAGE" = "dependencies1" ] || [ "${STAGE}" = "all" ]; then \
 RUN if [ "$STAGE" = "dependencies1" ] || [ "${STAGE}" = "all" ]; then \
     git clone https://github.com/xiph/opus && \
     cd opus && git checkout v1.2-alpha2 && \
-    ./autogen.sh && ./configure && make $MAKE_ARGS && make install; 
+    ./autogen.sh && ./configure && make $MAKE_ARGS && make install; \
     fi
