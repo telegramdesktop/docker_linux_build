@@ -95,7 +95,7 @@ RUN if [ "$STAGE" = "dependencies1" ] || [ "${STAGE}" = "all" ]; then \
 RUN if [ "$STAGE" = "dependencies1" ] || [ "${STAGE}" = "all" ]; then \
     git clone https://github.com/openssl/openssl && \
     cd openssl && git checkout OpenSSL_1_0_1-stable && \
-    ./config && make $MAKE_ARGS && make instal && \
+    ./config && make $MAKE_ARGS && make install && \
 	rm -rf ./*; \
     fi
 
