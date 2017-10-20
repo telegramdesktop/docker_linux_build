@@ -81,7 +81,7 @@ RUN if [ "$STAGE" = "dependencies1" ] || [ "${STAGE}" = "all" ]; then \
     git clone git://repo.or.cz/openal-soft.git && \
     cd openal-soft/build && \
     cmake -D LIBTYPE:STRING=STATIC .. && \
-    make $MAKE_ARGS make install; \
+    make $MAKE_ARGS && make install; \
     fi
 
 # openssl
@@ -112,8 +112,7 @@ RUN if [ "$STAGE" = "dependencies2" ] || [ "${STAGE}" = "all" ]; then \
     git clone https://github.com/telegramdesktop/hime.git && \
     cd ../../../.. && \
     ./configure -prefix "/usr/local/tdesktop/Qt-5.6.2" -release -force-debug-info -opensource -confirm-license -qt-zlib -qt-libpng -qt-libjpeg -qt-freetype -qt-harfbuzz -qt-pcre -qt-xcb -qt-xkbcommon-x11 -no-opengl -no-gtkstyle -static -openssl-linked -nomake examples -nomake tests && \
-    make $MAKE_ARGS && \
-    sudo make install; \
+    make $MAKE_ARGS && make install; \
 	fi
 
 # gyp
@@ -131,7 +130,7 @@ RUN if [ "$STAGE" = "dependencies2" ] || [ "${STAGE}" = "all" ]; then \
     cd breakpad && \
     ./configure && \
     make $MAKE_ARGS && \
-    sudo make install && \
+    make install && \
     cd src && \
     git clone https://github.com/google/googletest testing && \
     cd tools && \
