@@ -2,7 +2,7 @@
 
 function pushToHub {
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-    docker push telegramdesktop/docker_linux_dependencies1
+    docker push "$1"
 }
 
 if [ ! -d tdesktop ]; then
@@ -21,7 +21,7 @@ elif [ "$1" = "dependencies2" ]; then
         exit $status
     fi
     
-    pushToHub
+    pushToHub telegramdesktop/tdesktop
 else 
     docker pull telegramdesktop/docker_linux_dependencies1
     docker build . -t telegramdesktop/docker_linux_dependencies1 --build-arg STAGE="$1"
@@ -31,5 +31,5 @@ else
         exit $status
     fi
     
-    pushToHub
+    pushToHub telegramdesktop/docker_linux_dependencies1
 fi
