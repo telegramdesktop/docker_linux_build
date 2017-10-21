@@ -138,5 +138,6 @@ RUN if [ "$STAGE" = "dependencies2" ] || [ "${STAGE}" = "all" ]; then \
     git clone https://chromium.googlesource.com/breakpad/breakpad && \
     git clone https://chromium.googlesource.com/linux-syscall-support breakpad/src/third_party/lss && \
     cd breakpad && \
-    ./configure && make $MAKE_ARGS && make install; \
+    ./configure && make $MAKE_ARGS && make install && \
+    rm -rf ./*; \
     fi
