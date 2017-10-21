@@ -133,19 +133,10 @@ RUN if [ "$STAGE" = "dependencies2" ] || [ "${STAGE}" = "all" ]; then \
     git apply ../../tdesktop/Telegram/Patches/gyp.diff; \
     fi
 
-# breakpad, google test
+# breakpad
 RUN if [ "$STAGE" = "dependencies2" ] || [ "${STAGE}" = "all" ]; then \
     git clone https://chromium.googlesource.com/breakpad/breakpad && \
     git clone https://chromium.googlesource.com/linux-syscall-support breakpad/src/third_party/lss && \
     cd breakpad && \
-    ./configure && \
-    make $MAKE_ARGS && \
-    make install && \
-    cd src && \
-    git clone https://github.com/google/googletest testing && \
-    cd tools && \
-    ../../../gyp/gyp  --depth=. --generator-output=.. -Goutput_dir=../out tools.gyp --format=cmake && \
-    cd ../../out/Default && \
-    cmake . && \
-    make $MAKE_ARGS dump_syms; \
+    ./configure && make $MAKE_ARGS && make install; \
     fi
