@@ -88,7 +88,7 @@ RUN if [ "$STAGE" = "dependencies1" ] || [ "${STAGE}" = "all" ]; then \
     cd openal-soft/build && \
     cmake -D LIBTYPE:STRING=STATIC .. && \
     make $MAKE_ARGS && make install && \
-	cd .. && rm -rf openal-soft; \
+	cd ../.. && rm -rf openal-soft; \
     fi
 
 # openssl
