@@ -6,7 +6,7 @@ LABEL description="Build container for Telegram Desktop (Linux)"
 
 ENV DEBIAN_FRONTEND=noninteractive
 COPY tdesktop/Telegram/Patches /TBuild/tdesktop/Telegram/Patches
-ADD build_telegram.sh /TBuild/build_telegram.sh
+ADD build_tdesktop.sh /TBuild/build_tdesktop.sh
 WORKDIR /TBuild/Libraries
 
 ARG STAGE="all"
@@ -148,4 +148,4 @@ RUN if [ "$STAGE" = "dependencies2" ] || [ "${STAGE}" = "all" ]; then \
     rm -rf tdesktop; \
 	fi
 
-#CMD /TBuild/build_telegram.sh
+#CMD /TBuild/build_tdesktop.sh
