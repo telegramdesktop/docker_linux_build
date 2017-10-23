@@ -1,7 +1,7 @@
 ARG FROM="ubuntu:14.04"
 
 FROM ${FROM}
-LABEL maintainer="Telegram Desktop (https://github.com/telegramdesktop/docker)"
+LABEL maintainer="Telegram Desktop (https://github.com/telegramdesktop/docker_linux_build)"
 LABEL description="Build container for Telegram Desktop (Linux)"
 
 ENV DEBIAN_FRONTEND=noninteractive
