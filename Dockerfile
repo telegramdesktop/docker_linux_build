@@ -146,7 +146,7 @@ RUN if [ "$STAGE" = "dependencies2" ] || [ "${STAGE}" = "all" ]; then \
 
 # delete patches
 RUN if [ "$STAGE" = "dependencies2" ] || [ "${STAGE}" = "all" ]; then \
-    rm -rf tdesktop; \
+    rm -rf /TBuild/tdesktop; \
 	fi
 
 #CMD /TBuild/build_tdesktop.sh
