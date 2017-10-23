@@ -141,3 +141,8 @@ RUN if [ "$STAGE" = "dependencies2" ] || [ "${STAGE}" = "all" ]; then \
     ./configure && make $MAKE_ARGS && make install && \
     cd .. && rm -rf breakpad; \
     fi
+
+# delete patches
+RUN if [ "$STAGE" = "dependencies2" ] || [ "${STAGE}" = "all" ]; then \
+    rm -rf tdesktop; \
+	fi
