@@ -12,6 +12,6 @@ before_install:
 jobs:
   include:
     - stage: dependencies1 
-      script: ./build.sh dependencies1
+      script: ./build_image.sh dependencies1
     - stage: dependencies2
-      script: ./build.sh dependencies2
+      script: ./build_image.sh dependencies2
