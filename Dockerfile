@@ -5,6 +5,7 @@ LABEL maintainer="Telegram Desktop (https://github.com/telegramdesktop/docker_li
 LABEL description="Build container for Telegram Desktop (Linux)"
 
 ENV DEBIAN_FRONTEND=noninteractive
+ENV TDESKTOP_BRANCH master
 COPY tdesktop/Telegram/Patches /TBuild/tdesktop/Telegram/Patches
 ADD build_tdesktop.sh /TBuild/build_tdesktop.sh
 WORKDIR /TBuild/Libraries
