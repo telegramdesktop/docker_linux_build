@@ -54,7 +54,7 @@ while test $# -gt 0; do
   esac
 done
 
-#docker run --name $CONTAINER_NAME --env TDESKTOP_BRANCH=${TDESKTOP_BRANCH} --env VERSION=${VERSION} --env MAKE_THREADS_CNT=${MAKE_THREADS_CNT} $IMAGE_NAME 
+docker run --name $CONTAINER_NAME --env TDESKTOP_BRANCH=${TDESKTOP_BRANCH} --env VERSION=${VERSION} --env MAKE_THREADS_CNT=${MAKE_THREADS_CNT} $IMAGE_NAME 
 
 BIN_PATH="/TBuild/tdesktop/out/${VERSION}/Telegram"
 DEST_PATH="bin"
