@@ -1,0 +1,5 @@
+# Everything from tdesktop repository
+tdesktop/
+
+# Builded binary files
+bin/
