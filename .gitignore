@@ -1,2 +1,5 @@
+# Everything from tdesktop repository
 tdesktop/
-Telegram
+
+# Builded binary files
+bin/
