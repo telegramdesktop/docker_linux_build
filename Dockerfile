@@ -28,7 +28,7 @@ RUN if [ "$STAGE" = "dependencies1" ] || [ "${STAGE}" = "all" ]; then \
     update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 60 && \
     update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 60 && \
     add-apt-repository -y --remove ppa:ubuntu-toolchain-r/test && \
-    add-apt-repository -y --remove ppa:george-edison55/cmake-3.x
+    add-apt-repository -y --remove ppa:george-edison55/cmake-3.x ; \
     fi
 
 # dependencies from Ubuntu repositories
@@ -79,12 +79,12 @@ RUN if [ "$STAGE" = "dependencies1" ] || [ "${STAGE}" = "all" ]; then \
     texi2html \
     xutils-dev \
     yasm cmake \
-    zlib1g-dev
+    zlib1g-dev ; \
     fi
 
 # range
 RUN if [ "$STAGE" = "dependencies1" ] || [ "${STAGE}" = "all" ]; then \
-    git clone https://github.com/ericniebler/range-v3
+    git clone https://github.com/ericniebler/range-v3 ; \
     fi
 
 # zlib
@@ -93,7 +93,7 @@ RUN if [ "$STAGE" = "dependencies1" ] || [ "${STAGE}" = "all" ]; then \
     cd zlib && \
     ./configure && \
     make $MAKE_THREADS_CNT && \
-    make install
+    make install ; \
     fi
 
 # opus
@@ -104,7 +104,7 @@ RUN if [ "$STAGE" = "dependencies1" ] || [ "${STAGE}" = "all" ]; then \
     ./autogen.sh && \
     ./configure && \
     make $MAKE_THREADS_CNT && \
-    make install
+    make install ; \
     fi
 
 # libva
@@ -113,7 +113,7 @@ RUN if [ "$STAGE" = "dependencies1" ] || [ "${STAGE}" = "all" ]; then \
     cd libva && \
     ./autogen.sh --enable-static && \
     make $MAKE_THREADS_CNT && \
-    make install
+    make install ; \
     fi
 
 # libvdpau
@@ -122,7 +122,7 @@ RUN if [ "$STAGE" = "dependencies1" ] || [ "${STAGE}" = "all" ]; then \
     cd libvdpau && \
     ./autogen.sh --enable-static && \
     make $MAKE_THREADS_CNT && \
-    make install
+    make install ; \
     fi
 
 # ffmpeg
@@ -223,7 +223,7 @@ RUN if [ "$STAGE" = "dependencies1" ] || [ "${STAGE}" = "all" ]; then \
     --prefix=/usr/local \
     && \
     make $MAKE_THREADS_CNT && \
-    make install
+    make install ; \
     fi
 
 # portaudio
@@ -233,7 +233,7 @@ RUN if [ "$STAGE" = "dependencies1" ] || [ "${STAGE}" = "all" ]; then \
     git checkout 396fe4b669 && \
     ./configure && \
     make $MAKE_THREADS_CNT && \
-    make install
+    make install ; \
     fi
 
 # openal-soft
@@ -244,7 +244,7 @@ RUN if [ "$STAGE" = "dependencies1" ] || [ "${STAGE}" = "all" ]; then \
     cd build && \
     cmake -D LIBTYPE:STRING=STATIC .. && \
     make $MAKE_THREADS_CNT && \
-    make install
+    make install ; \
     fi
 
 # openssl
@@ -254,7 +254,7 @@ RUN if [ "$STAGE" = "dependencies1" ] || [ "${STAGE}" = "all" ]; then \
     git checkout OpenSSL_1_0_1-stable && \
     ./config && \
     make $MAKE_THREADS_CNT && \
-    make install
+    make install ; \
     fi
 
 # libxkbcommon
@@ -263,7 +263,7 @@ RUN if [ "$STAGE" = "dependencies1" ] || [ "${STAGE}" = "all" ]; then \
     cd libxkbcommon && \
     ./autogen.sh --disable-x11 && \
     make $MAKE_THREADS_CNT && \
-    make install
+    make install ; \
     fi
 
 # qt
@@ -300,7 +300,7 @@ RUN if [ "$STAGE" = "dependencies2" ] || [ "${STAGE}" = "all" ]; then \
     -static \
     && \
     make $MAKE_THREADS_CNT && \
-    make install
+    make install ; \
     fi
 
 # gyp
@@ -308,7 +308,7 @@ RUN if [ "$STAGE" = "dependencies2" ] || [ "${STAGE}" = "all" ]; then \
     git clone https://chromium.googlesource.com/external/gyp && \
     cd gyp && \
     git checkout 702ac58e47 && \
-    git apply ../../tdesktop/Telegram/Patches/gyp.diff
+    git apply ../../tdesktop/Telegram/Patches/gyp.diff ; \
     fi
 
 # breakpad
@@ -327,14 +327,14 @@ RUN if [ "$STAGE" = "dependencies2" ] || [ "${STAGE}" = "all" ]; then \
     ../../../gyp/gyp  --depth=. --generator-output=.. -Goutput_dir=../out tools.gyp --format=cmake && \
     cd ../../out/Default && \
     cmake . && \
-    make $MAKE_THREADS_CNT dump_syms; exit 0
+    make $MAKE_THREADS_CNT dump_syms; exit 0 ; \
     fi
 
 WORKDIR /TBuild
 
 # remove patches
 RUN if [ "$STAGE" = "dependencies2" ] || [ "${STAGE}" = "all" ]; then \
-    rm -rf tdesktop
+    rm -rf tdesktop ; \
     fi
 
 # build Telegram Desktop on every container run
